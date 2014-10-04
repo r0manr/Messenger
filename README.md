@@ -1,7 +1,13 @@
 Messenger
 =========
 
-chat with your friends in real-time messenger
+Chat with your friends in the real-time messenger.
+Technologies used in the project:
+1) ASP.NET MVC 5.0
+2) Web API 2.0
+3) AngularJS
+4) Zurb foundation UI framework
+5) Ninject
 
 You can test this app with the existing accounts:
 Login: ironman@avengers.com Password: intelligence

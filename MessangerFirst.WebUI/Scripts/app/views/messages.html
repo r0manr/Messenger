@@ -1,0 +1,48 @@
+﻿<div class="row">
+
+    <div class="large-3 columns ">
+        <div class="panel">
+            <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+                <section class="section">
+                    <a href="#/Create" class="success button">Написать</a>
+                </section>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel radius large-6 columns">
+        <div infinite-scroll='reddit.nextPage()' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'>
+            <div ng-repeat="message in reddit.items">
+                <div class="row">
+                    <p><strong>Отправил: </strong>{{message.Sender}}</p>
+                    <p><strong>Получил: </strong>{{message.Reciever}}</p>
+                    <p><strong>Дата: </strong>{{message.CreatedOn}}</p>
+                    <p><strong>Тема: </strong>{{message.Subject}}</p>
+                    <p class="panel callout">{{message.Body}}</p>
+                    <ul class="inline-list">
+                        <li><a ng-href="#/Createmess/{{message.Id}}">Ответить</a></li>
+                    </ul>
+                    <button ng-click="deletemess(message)" class="alert button">Удалить</button>
+                </div>
+                <hr />
+            </div>
+
+            <div ng-show='reddit.busy'>Loading data...</div>
+
+        </div>
+    </div>
+
+    <aside class="panel large-3 columns hide-for-small">
+
+        <div class="large-2 columns">
+            <p><strong>Пользователи:</strong></p>
+            <div ng-repeat="user in users" ng-model="user">
+                <div class="row">
+                    <p>{{user.Email}}</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</div>

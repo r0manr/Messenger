@@ -1,0 +1,48 @@
+﻿using System;
+using System.Web.Mvc;
+using MessangerFirst.Core.Model;
+using MessangerFirst.Core.Repository;
+
+namespace MessangerFirst.WebUI.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly IRepo<User> _repo;
+        private readonly IRepo<Message> _repoMess;
+        private readonly IRepo<History> _repoHist;
+        public HomeController(IRepo<User> repo, IRepo<Message> repoMess, IRepo<History> repoHist)
+        {
+            _repo = repo;
+            _repoMess = repoMess;
+            _repoHist = repoHist;
+        }
+
+        public ActionResult Index()
+        {
+            //User user = new User { Login = "Rome" };
+            //_repo.Insert(user);
+            //_repo.Save();
+
+            //_repoMess.Insert(new Message { SenderId = user.Id, AddresseeId = user.Id });
+            //_repoMess.Save();
+
+            //_repoHist.Insert(new History() { Content = "12 year", Title = "12 Year", CreateOn = DateTime.Now });
+            //_repoHist.Save();
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}

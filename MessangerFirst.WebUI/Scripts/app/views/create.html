@@ -1,0 +1,24 @@
+﻿<div class="large-12 columns">
+    <label>
+        Выберите пользователя
+        <select data-ng-options="user.Email for user in users" required data-ng-model="selectedOption"></select>
+    </label>
+
+    <label>
+        Тема
+        <input type="text" placeholder="Введите тему" ng-model="title" />
+    </label>
+
+    <label>
+        Сообщение
+        <textarea placeholder="Введите сообщение" ng-model="text"></textarea>
+    </label>
+
+    <label>
+        <button class="success button" ng-click="sendmessage()">Отправить</button>
+    </label>
+
+    <label>
+        <a href="/">Назад</a>
+    </label>
+</div>

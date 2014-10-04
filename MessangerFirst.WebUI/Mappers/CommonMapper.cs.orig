@@ -1,0 +1,24 @@
+﻿using System;
+using AutoMapper;
+using MessangerFirst.Core.Model;
+using MessangerFirst.WebUI.ViewModels;
+
+namespace MessangerFirst.WebUI.Mappers
+{
+    public class CommonMapper : IMapper
+    {
+        static CommonMapper()
+        {
+            Mapper.CreateMap<User, RegisterViewModel>();
+            Mapper.CreateMap<RegisterViewModel, User>();
+
+            Mapper.CreateMap<History, HistoryViewModel>();
+            Mapper.CreateMap<HistoryViewModel, History>();
+        }
+
+        public object Map(object source, Type sourceType, Type destinationType)
+        {
+            return Mapper.Map(source, sourceType, destinationType);
+        }
+    }
+}

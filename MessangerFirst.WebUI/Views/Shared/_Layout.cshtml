@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    @*Set the viewport width to device width for mobile *@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewBag.Title - Welcome to Foundation</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/foundation/css")
+
+    @RenderSection("head", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="nav-bar right">
+                <ul class="button-group">
+                    <li>@Html.ActionLink("Домой", "Index", "Home", null, new { @class = "button" })</li>
+                    <li>@Html.ActionLink("Аккаунт", "EditAccount", "Account", null, new { @class = "button" })</li>
+                    <li>@Html.ActionLink("Выход", "LogOff", "Account", null, new { @class = "button" })</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="row">
+        <div class="large-12 columns">
+            <hr />
+            <div class="row">
+                <div class="large-5 columns">
+                    <p>© Copyright</p>
+                </div>
+                <div class="large-7 columns">
+                    <ul class="inline-list right"></ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/foundation")
+    <script src="~/Scripts/angular.js"></script>
+    <script src='~/Scripts/ng-infinite-scroll.js'></script>
+    <script src="~/Scripts/angular-resource.js"></script>
+    <script src="~/Scripts/angular-route.js"></script>
+    <script src="~/Scripts/angular-ui-router.js"></script>
+
+    <script src="~/Scripts/app/app.js"></script>
+
+    <script src="~/Scripts/app/services/services.js"></script>
+
+    <script src="~/Scripts/app/controllers/HomeController.js"></script>
+    <script src="~/Scripts/app/controllers/CreateController.js"></script>
+
+    <script src="~/Scripts/myJS.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <script>
+        $(document).foundation();
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

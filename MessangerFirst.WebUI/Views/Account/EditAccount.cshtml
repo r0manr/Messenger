@@ -1,0 +1,50 @@
+﻿@model MessangerFirst.WebUI.ViewModels.EditAccountViewModel
+
+@{
+    ViewBag.Title = "Редактирование аккаунта";
+}
+<h2>Редактирование аккаунта</h2>
+
+@using (Html.BeginForm("EditAccount", "Account", FormMethod.Post, new { @class = "data-abide" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="large-6 columns">
+
+            <div class="large-6 columns">
+
+                <div class="row">
+                    @Html.LabelFor(model => model.FirstName)
+                    @Html.EditorFor(model => model.FirstName)
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.LastName)
+                    @Html.EditorFor(model => model.LastName)
+                </div>
+
+                <div class="row">
+                    @Html.LabelFor(model => model.PhoneNumber)
+                    @Html.EditorFor(model => model.PhoneNumber)
+                </div>
+
+                <div class="row">
+                    <input type="submit" value="Редактировать" class="button" />
+                </div>
+
+            </div>
+
+            <div class="large-4 columns">
+                <a class="alert button" href="@Url.Action("ChangePassword")">Изменить пароль</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div id="AlertMessage">@TempData["AlertMessage"]</div>
+}

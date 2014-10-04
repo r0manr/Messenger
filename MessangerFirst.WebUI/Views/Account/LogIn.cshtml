@@ -1,0 +1,43 @@
+﻿@model MessangerFirst.WebUI.ViewModels.LoginViewModel
+
+@{
+    ViewBag.Title = "Вход";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>Вход</h2>
+
+@using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @class = "data-abide" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div class="large-6 columns">
+
+            <div class="row">
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.Remember)
+                @Html.EditorFor(model => model.Remember)
+                @Html.ValidationMessageFor(model => model.Remember)
+            </div>
+
+            <div class="row">
+                <input type="submit" value="Войти" class="button" />
+            </div>
+
+        </div>
+
+    </div>
+}

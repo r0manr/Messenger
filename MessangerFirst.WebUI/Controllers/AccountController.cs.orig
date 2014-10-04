@@ -1,0 +1,81 @@
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using Antlr.Runtime;
+using MessangerFirst.Core.Model;
+using MessangerFirst.Core.Security;
+using MessangerFirst.Core.Service;
+using MessangerFirst.WebUI.Mappers;
+using MessangerFirst.WebUI.ViewModels;
+
+namespace MessangerFirst.WebUI.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly IFormsAuthentication _formsAuth;
+        private readonly IUserService _userService;
+        private readonly IMapper _mapper;
+        public AccountController(IFormsAuthentication formsAuth, IUserService userService, IMapper mapper)
+        {
+            _formsAuth = formsAuth;
+            _userService = userService;
+            _mapper = mapper;
+        }
+
+        public ActionResult RegisterAccount()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegisterAccount(RegisterViewModel viewModel)
+        {
+            viewModel.Id = Guid.NewGuid();
+
+            if (ModelState.IsValid)
+            {
+                //todo: it needs same dbContext
+                var user = (User)_mapper.Map(viewModel, typeof(RegisterViewModel), typeof(User));
+                _userService.Create(user);
+                return RedirectToAction("LogIn");
+            }
+
+            return View();
+        }
+
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(LoginViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var user = _userService.Get(viewModel.Login, viewModel.Password);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", @"Неверный логин или пароль");
+                return View();
+            }
+
+            //_formsAuth.SignIn(user.Login, viewModel.Remember, user.Roles.Select(o => o.Name));
+            _formsAuth.SignIn(user.Login, viewModel.Remember, new[] { "admin" });
+
+            return RedirectToAction("Display", "History");
+
+        }
+
+        public ActionResult LogOff()
+        {
+            _formsAuth.SignOut();
+            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("LogIn", "Account");
+        }
+    }
+}

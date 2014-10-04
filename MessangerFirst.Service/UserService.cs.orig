@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using MessangerFirst.Core.Model;
+using MessangerFirst.Core.Repository;
+using MessangerFirst.Core.Security;
+using MessangerFirst.Core.Service;
+
+namespace MessangerFirst.Service
+{
+    public class UserService : CrudService<User>, IUserService
+    {
+        private readonly IHasher _hasher;
+        public UserService(IRepo<User> repo, IHasher hasher)
+            : base(repo)
+        {
+            _hasher = hasher;
+        }
+
+        public override Guid Create(User user)
+        {
+            user.Password = _hasher.Encrypt(user.Password);
+            return base.Create(user);
+        }
+
+        public bool IsUnique(string login)
+        {
+            return !repo.Where(o => o.Login == login).Any();
+        }
+
+        public void ChangePassword(Guid id, string password)
+        {
+            repo.Get(id).Password = _hasher.Encrypt(password);
+            repo.Save();
+        }
+
+        public User Get(string login, string password)
+        {
+            var user = repo.Where(o => o.Login == login).SingleOrDefault();
+            if (user != null && !_hasher.CompareStringToHash(password, user.Password)) return null;
+            return user;
+        }
+    }
+}

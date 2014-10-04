@@ -147,7 +147,9 @@ UpgradeLog*.htm
 # svn
 .svn
  
-
+# Packages
+**/packages/*
+ 
  
 #LightSwitch generated files
 GeneratedArtifacts/
